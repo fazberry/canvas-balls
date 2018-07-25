@@ -1,1 +1,3 @@
-# canvas-balls
+# Canvas Bouncy Balls
+
+Experimenting with canvas.
