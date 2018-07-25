@@ -54,13 +54,15 @@ function createCircle(x, y) {
 	stage.addChild(this.circle);
 
 	createjs.Ticker.addEventListener("tick", function(){
-		if(self.falling){
-			self.velocity += 0.05;
-		} else if(self.velocity > 0){
-			self.velocity -= 0.05
-		} else {
-			self.falling = true;
-		}
+
+		// Add gravity
+		// if(self.falling){
+		// 	self.velocity += 0.05;
+		// } else if(self.velocity > 0){
+		// 	self.velocity -= 0.05
+		// } else {
+		// 	self.falling = true;
+		// }
 
 
 		// Balls drop vertically 
@@ -89,6 +91,18 @@ function createCircle(x, y) {
         	}
 
         	self.circle.y = stage.canvas.height;
+       	}
+
+       	// Stop balls go off the top
+       	if (self.circle.y < 0) { 
+        	self.speedY = -self.speedY;
+        	self.circle.y = 0;
+       	}
+
+       	// Make the balls bounce horizontally
+       	if (self.circle.x > stage.canvas.width) { 
+        	self.speedX = -self.speedX;
+        	self.circle.x = stage.canvas.width;
        	}
 
 	});
