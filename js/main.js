@@ -53,6 +53,24 @@ function createCircle(x, y) {
 
 	stage.addChild(this.circle);
 
+	createjs.Ticker.addEventListener("tick", function(){
+		if(self.falling){
+			self.velocity += 0.05;
+		} else if(self.velocity > 0){
+			self.velocity -= 0.05
+		} else {
+			self.falling = true;
+		}
+
+		self.circle.x += self.speedX;
+		if(self.falling){
+			self.circle.y += self.velocity;
+		} else {
+			self.circle.y -= self.velocity;
+		}
+
+	});
+
 }
 
 function getRandomColor() {
