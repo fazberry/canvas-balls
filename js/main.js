@@ -62,12 +62,34 @@ function createCircle(x, y) {
 			self.falling = true;
 		}
 
+
+		// Balls drop vertically 
 		self.circle.x += self.speedX;
 		if(self.falling){
 			self.circle.y += self.velocity;
 		} else {
 			self.circle.y -= self.velocity;
 		}
+
+		// Make the balls bounce vertically
+		if (self.circle.y >= stage.canvas.height) { 
+        	self.speedY = -self.speedY;
+        	self.falling = false;
+        	self.velocity *= 0.8;
+        	if(self.speedX > 0) {
+        		self.speedX -= 0.1;
+        		if(self.speedX < 0) {
+        			self.speedX = 0
+        		}
+        	} else if(self.speedX < 0) {
+        		self.speedX += 0.1;
+        		if(self.speedX > 0) {
+        			self.speedX = 0
+        		}
+        	}
+
+        	self.circle.y = stage.canvas.height;
+       	}
 
 	});
 
